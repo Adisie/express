@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+    <div class="container">
+        <%- include('./partials/header.ejs') %>
+        <div class="content">    
+            <p><%= blog.content %> <br><br>
+                <a href="">edit</a> | 
+                <button data-id="<%= blog.id %>" id="delete-link">delete</button>
+            </p>
+        </div>
+        <footer>
+            
+        </footer>
+    </div>
+    <script>
+        var delete_link = document.getElementById('delete-link')
+        
+        delete_link.addEventListener('click',(e) =>{
+
+            var endpoint = `http://localhost:3000/${delete_link.dataset.id}`
+            
+            fetch(endpoint,{
+            method: 'DELETE'
+            })
+            .then(response=>response.json())
+            .then(data=>window.location.href=data.redirect)
+            .catch(error=>console.log(error))
+
+             })
+    </script>
+</body>
+</html>

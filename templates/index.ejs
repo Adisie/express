@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+<body>
+    <div class="container">
+        <%- include('./partials/header.ejs') %>
+        <div class="content">
+            <% if(blogs.length) { %>
+                <% blogs.forEach(blog=>{ %>
+                    <p><%= blog.content %>
+                        <a href="/single-blog/<%= blog.id %>">more</a>
+                    </p>
+                <% }) %>
+            <% } %>
+        </div>
+        <footer>
+            <form action="/" method="post">
+                <textarea name="content" id="content"></textarea>
+                <button type="submit">send</button>
+            </form>
+        </footer>
+    </div>
+    <script>
+        var textarea = document.querySelector('textarea');
+        textarea.addEventListener('keyup',e=>{
+            textarea.style.height = "32px";
+            let scHeight = e.target.scrollHeight;
+            textarea.style.height = `${scHeight}px`;
+            console.log(scHeight)
+        })
+    </script>
+</body>
+</html>
